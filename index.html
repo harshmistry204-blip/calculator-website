@@ -193,8 +193,14 @@ async function send() {
     });
 
     let data = await res.json();
-    let reply = data.choices[0].message.content;
+console.log(data);
 
+if (!data.choices) {
+  typing.textContent = "Error: " + JSON.stringify(data);
+  return;
+}
+
+let reply = data.choices[0].message.content;
     typing.remove();
     addMessage(reply, "bot");
 
